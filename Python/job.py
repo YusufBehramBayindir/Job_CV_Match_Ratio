@@ -44,4 +44,4 @@ match_ratio_cv = difflib.SequenceMatcher(None, ' '.join(keywords), cv_text).rati
 print(f"Similarity ratio between job description text and keywords: {match_ratio:.2%}")
 print(f"Similarity ratio between selected CV and keywords: {match_ratio_cv:.2%}")
 
-print(f"Seçilen CV ile anahtar kelimeler arasındaki benzerlik oranı: {match_ratio_cv:.2%}")
+print(f"Seçilen CV ile anahtar kelimeler
