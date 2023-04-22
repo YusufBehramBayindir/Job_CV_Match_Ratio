@@ -1,14 +1,14 @@
 import difflib
 
-# Firstly, let's read the keywords from a txt file and store them in a list:
+# ilk olarak, anahtar kelimeleri bir txt dosyasından okuyup bir liste olarak depolayalım:
 with open('keywords.txt', 'r') as f:
     keywords = f.read().splitlines()
 
-# Then, let's read the job description from another txt file:
+# Daha sonra, iş ilanını başka bir txt dosyasından okuyalım:
 with open('job.txt', 'r') as f:
     job_description = f.read()
 
-# Next, let's open the CV file that the user will select:
+# Ardından, kullanıcıdan seçilecek CV dosyasını açalım:
 import PyPDF2
 
 with open('cv.pdf', 'rb') as f:
@@ -19,27 +19,26 @@ with open('cv.pdf', 'rb') as f:
         cv_text += page.extract_text()
 
 
-# Then, let's clean the keywords and job description text:
+# Daha sonra, anahtar kelimeleri ve iş ilanı metnini temizleyelim:
 import re
 
-# Convert keywords to lowercase and remove unnecessary spaces
+# Anahtar kelimeleri küçük harfe çevirin ve gereksiz boşlukları kaldırın
 keywords = [re.sub(r'\s+', ' ', keyword.strip().lower()) for keyword in keywords]
-# Clean job description text by removing unnecessary spaces
+# İş ilanı metnini gereksiz boşlukları kaldırarak temizleyin
 job_description = re.sub(r'\s+', ' ', job_description.strip().lower())
-# Clean CV text by removing unnecessary spaces
+# CV metnini gereksiz boşlukları kaldırarak temizleyin
 cv_text = re.sub(r'\s+', ' ', cv_text.strip().lower())
 
 
-
-# Let's compare the keywords and job description text to calculate the similarity ratio and print the result:
+# anahtar kelimeleri ve iş ilanı metnini karşılaştırarak benzerlik oranını hesaplayalım ve sonucu ekrana yazdıralım:
 import difflib
 
-# Calculate the similarity ratio between keywords and job description text
+# Anahtar kelimelerle iş ilanı metni arasındaki benzerlik oranını hesaplayın
 match_ratio = difflib.SequenceMatcher(None, ' '.join(keywords), job_description).ratio()
 
-# Calculate the similarity ratio between keywords and the selected CV
+# Seçilen CV'deki anahtar kelimelerle iş ilanı arasındaki benzerlik oranını hesaplayın
 match_ratio_cv = difflib.SequenceMatcher(None, ' '.join(keywords), cv_text).ratio()
 
-# Print the result
-print(f"Similarity ratio between job description text and keywords: {match_ratio:.2%}")
-print(f"Similarity ratio between selected CV and keywords: {match_ratio_cv:.2%}")int(f"Seçilen CV ile anahtar kelimeler
+# Sonucu ekrana yazdırın
+print(f"Iş ilanı metni ile anahtar kelimeler arasındaki benzerlik oranı: {match_ratio:.2%}")
+print(f"Seçilen CV ile anahtar kelimeler arasındaki benzerlik oranı: {match_ratio_cv:.2%}")
